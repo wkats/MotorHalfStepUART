@@ -1,9 +1,21 @@
-#include <msp430.h>
+/*Controlador de Motor a Pasos Unipolar, modelo 28BYJ-48.
+ * 5 Hilos, con código de colores. Conexión con el MSP430G2553
+ * a través del puerto 2. Pines:
+ * P2.0 -> Azul
+ * P2.1 -> Rosa
+ * P2.2 -> Amarillo
+ * P2.3 -> Naranja
+ * Rojo a 5V o 3.3 de la placa Launchpad
+ * Conexión UART  9600 baudios, 8bits,sin paridad,1 stop bit
+ * */
 
+#include <msp430.h>
 unsigned int iStep=0;	//Índice de paso
 unsigned char _cR='\0';	//Caracter leído
 unsigned char stepsH[8]={0x01,0x03,0x02,0x06,0x04,0x0c,0x08,0x09};	// Pasos sentido horario
 unsigned char stepsA[8]={0x09,0x08,0x0c,0x04,0x06,0x02,0x03,0x01}; // Pasos sentido antihorario
+//unsigned char stepsH[4]={0x03,0x06,0x0c,0x09};	// Pasos sentido horario
+//unsigned char stepsA[4]={0x09,0x0c,0x06,0x03}; // Pasos sentido antihorario
 unsigned char *steps;	//Apuntador al arreglo de pasos deseado
 const unsigned int vel[10]={1000,2000,3000,4000,5000,6000,7000,8000,9000,900}; //10 Velocidades
 char uart_getc();	//	Obtener un caracter
@@ -50,13 +62,8 @@ char uart_getc(void){
 
 }
 
-void delay(void){
-	volatile unsigned int i;//Delay
-	for(i=0;i<8000;i++){;}
-	return;
-}		//Se cuenta hasta 8mil y se sale de la función
 void ejecutarComando(unsigned char _comando[]){
-	TACTL|=TAIE;		//Encendemos la interrupción de timer
+	TACTL|=TAIE;		//Encendemos la interrupción de timer, limpiamos el TA0R
 	switch(_comando[0]){//Comando para el sentido del motor
 	case 'A':	//Sentido Antihorario
 		steps=stepsA;
@@ -67,6 +74,7 @@ void ejecutarComando(unsigned char _comando[]){
 	case 'S':	//Stop, detener el motor
 		TACTL&=~TAIE;		//Limpiamos la interrupción del timer
 		TACTL &= ~TAIFG;	//Se limpia el flag de interrupción de timer
+		iStep=0;
 		break;
 	}
 

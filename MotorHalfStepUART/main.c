@@ -17,7 +17,8 @@ unsigned char stepsA[8]={0x09,0x08,0x0c,0x04,0x06,0x02,0x03,0x01}; // Pasos sent
 //unsigned char stepsH[4]={0x03,0x06,0x0c,0x09};	// Pasos sentido horario
 //unsigned char stepsA[4]={0x09,0x0c,0x06,0x03}; // Pasos sentido antihorario
 unsigned char *steps;	//Apuntador al arreglo de pasos deseado
-const unsigned int vel[10]={1000,2000,3000,4000,5000,6000,7000,8000,9000,900}; //10 Velocidades
+//const unsigned int vel[10]={1000,2000,3000,4000,5000,6000,7000,8000,9000,900}; //10 Velocidades
+const unsigned int vel[4]={1000,1428,2500,10000}; //10 Velocidades
 char uart_getc();	//	Obtener un caracter
 void ejecutarComando(unsigned char comando[]);
 
@@ -38,7 +39,7 @@ int main(void)
   P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TX
   P1SEL2 = BIT1 + BIT2 ;                    // P1.1 = RXD, P1.2=TXD
   UCA0CTL1 |= UCSSEL_2;                     // SMCLK
-  UCA0BR0 = 104;                            // 1MHz 9600
+  UCA0BR0 = 104;                             // 1MHz 9600
   UCA0BR1 = 0;                              // 1MHz 9600
   UCA0MCTL = UCBRS0;                        // Modulation UCBRSx = 1
   UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
@@ -63,23 +64,25 @@ char uart_getc(void){
 }
 
 void ejecutarComando(unsigned char _comando[]){
-	TACTL|=TAIE;		//Encendemos la interrupción de timer, limpiamos el TA0R
 	switch(_comando[0]){//Comando para el sentido del motor
 	case 'A':	//Sentido Antihorario
 		steps=stepsA;
+		TACTL|=TAIE;		//Encendemos la interrupción de timer, limpiamos el TA0R
 		break;
 	case 'H':	//Sentido Horario
 		steps=stepsH;
+		TACTL|=TAIE;		//Encendemos la interrupción de timer, limpiamos el TA0R
 		break;
 	case 'S':	//Stop, detener el motor
 		TACTL&=~TAIE;		//Limpiamos la interrupción del timer
-		TACTL &= ~TAIFG;	//Se limpia el flag de interrupción de timer
+		TACTL&=~TAIFG;	//Se limpia el flag de interrupción de timer
 		iStep=0;
 		break;
 	}
-
-	if(_comando[1]>47 && _comando[1]<58){	//Si el char corresponde a un número
-		TACCR0=vel[_comando[1]-48];		//Le damos a TACCR0 la velocidad de ese número en el arreglo
+	if(_comando[0]!='S'){
+		if(_comando[1]>47 && _comando[1]<52){	//Si el char corresponde a un número
+			TACCR0=vel[_comando[1]-48];		//Le damos a TACCR0 la velocidad de ese número en el arreglo
+		}
 	}
 }
 

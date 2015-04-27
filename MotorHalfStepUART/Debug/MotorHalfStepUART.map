@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v4.3.3                      
 ******************************************************************************
->> Linked Sat Apr 25 19:27:24 2015
+>> Linked Mon Apr 27 16:20:08 2015
 
 OUTPUT FILE NAME:   <MotorHalfStepUART.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 0000c1d8
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000c1e4
 
 
 MEMORY CONFIGURATION
@@ -64,27 +64,27 @@ section   page    origin      length       input sections
                   000003b0    00000002     rts430_eabi.lib : boot.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    00000276     
+.text      0    0000c000    00000282     
                   0000c000    00000082     main.obj (.text:main)
                   0000c082    0000005e     rts430_eabi.lib : copy_decompress_rle.obj (.text:__TI_decompress_rle_core)
                   0000c0e0    0000005e                     : autoinit.obj (.text:_auto_init)
-                  0000c13e    00000052     main.obj (.text:ejecutarComando)
-                  0000c190    0000002c     main.obj (.text:timer_isr)
-                  0000c1bc    0000001c     main.obj (.text:recep_isr)
-                  0000c1d8    0000001a     rts430_eabi.lib : boot.obj (.text:_c_int00_noexit)
-                  0000c1f2    00000014                     : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
-                  0000c206    00000014                     : memset.obj (.text:memset)
-                  0000c21a    00000014     main.obj (.text:uart_getc)
-                  0000c22e    00000012     rts430_eabi.lib : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c240    00000012                     : memcpy.obj (.text:memcpy)
-                  0000c252    00000010                     : epilog.obj (.text)
-                  0000c262    00000006                     : isr_trap.obj (.text:__TI_ISR_TRAP)
-                  0000c268    00000006                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
-                  0000c26e    00000004                     : pre_init.obj (.text:_system_pre_init)
-                  0000c272    00000004                     : exit.obj (.text:abort)
+                  0000c13e    0000005e     main.obj (.text:ejecutarComando)
+                  0000c19c    0000002c     main.obj (.text:timer_isr)
+                  0000c1c8    0000001c     main.obj (.text:recep_isr)
+                  0000c1e4    0000001a     rts430_eabi.lib : boot.obj (.text:_c_int00_noexit)
+                  0000c1fe    00000014                     : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
+                  0000c212    00000014                     : memset.obj (.text:memset)
+                  0000c226    00000014     main.obj (.text:uart_getc)
+                  0000c23a    00000012     rts430_eabi.lib : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c24c    00000012                     : memcpy.obj (.text:memcpy)
+                  0000c25e    00000010                     : epilog.obj (.text)
+                  0000c26e    00000006                     : isr_trap.obj (.text:__TI_ISR_TRAP)
+                  0000c274    00000006                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
+                  0000c27a    00000004                     : pre_init.obj (.text:_system_pre_init)
+                  0000c27e    00000004                     : exit.obj (.text:abort)
 
-.const     0    0000c276    00000014     
-                  0000c276    00000014     main.obj (.const:vel)
+.const     0    0000c282    00000008     
+                  0000c282    00000008     main.obj (.const:vel)
 
 .cinit     0    0000c28a    0000002a     
                   0000c28a    00000017     (.cinit..data.load) [load image]
@@ -169,7 +169,7 @@ address    name
 00000057   BCSCTL1
 00000058   BCSCTL2
 00000053   BCSCTL3
-0000c272   C$$EXIT
+0000c27e   C$$EXIT
 00000059   CACTL1
 0000005a   CACTL2
 000010fb   CALBC1_12MHZ
@@ -266,10 +266,10 @@ address    name
 0000c2a8   __TI_Handler_Table_Limit
 UNDEFED    __TI_INITARRAY_Base
 UNDEFED    __TI_INITARRAY_Limit
-0000c262   __TI_ISR_TRAP
+0000c26e   __TI_ISR_TRAP
 00000001   __TI_args_main
-0000c22e   __TI_decompress_none
-0000c268   __TI_decompress_rle24
+0000c23a   __TI_decompress_none
+0000c274   __TI_decompress_rle24
 00000001   __TI_exit
 0000ffe4   __TI_int02
 0000ffe6   __TI_int03
@@ -283,37 +283,37 @@ UNDEFED    __TI_INITARRAY_Limit
 0000fff8   __TI_int12
 0000fffa   __TI_int13
 0000fffc   __TI_int14
-0000c1f2   __TI_zero_init
+0000c1fe   __TI_zero_init
 ffffffff   __binit__
 ffffffff   __c_args__
-0000c25e   __mspabi_func_epilog_1
-0000c25c   __mspabi_func_epilog_2
-0000c25a   __mspabi_func_epilog_3
-0000c258   __mspabi_func_epilog_4
-0000c256   __mspabi_func_epilog_5
-0000c254   __mspabi_func_epilog_6
-0000c252   __mspabi_func_epilog_7
+0000c26a   __mspabi_func_epilog_1
+0000c268   __mspabi_func_epilog_2
+0000c266   __mspabi_func_epilog_3
+0000c264   __mspabi_func_epilog_4
+0000c262   __mspabi_func_epilog_5
+0000c260   __mspabi_func_epilog_6
+0000c25e   __mspabi_func_epilog_7
 0000c0e0   _auto_init
 00000212   _cR
-0000c1d8   _c_int00
-0000c1d8   _c_int00_noexit
+0000c1e4   _c_int00
+0000c1e4   _c_int00_noexit
 0000fffe   _reset_vector
 000003b0   _stack
-0000c26e   _system_pre_init
-0000c272   abort
+0000c27a   _system_pre_init
+0000c27e   abort
 ffffffff   binit
 0000c13e   ejecutarComando
 00000210   iStep
 0000c000   main
-0000c240   memcpy
-0000c206   memset
-0000c1bc   recep_isr
+0000c24c   memcpy
+0000c212   memset
+0000c1c8   recep_isr
 00000214   steps
 00000200   stepsA
 00000208   stepsH
-0000c190   timer_isr
-0000c21a   uart_getc
-0000c276   vel
+0000c19c   timer_isr
+0000c226   uart_getc
+0000c282   vel
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -431,28 +431,28 @@ address    name
 0000c000   main
 0000c0e0   _auto_init
 0000c13e   ejecutarComando
-0000c190   timer_isr
-0000c1bc   recep_isr
-0000c1d8   _c_int00
-0000c1d8   _c_int00_noexit
-0000c1f2   __TI_zero_init
-0000c206   memset
-0000c21a   uart_getc
-0000c22e   __TI_decompress_none
-0000c240   memcpy
-0000c252   __mspabi_func_epilog_7
-0000c254   __mspabi_func_epilog_6
-0000c256   __mspabi_func_epilog_5
-0000c258   __mspabi_func_epilog_4
-0000c25a   __mspabi_func_epilog_3
-0000c25c   __mspabi_func_epilog_2
-0000c25e   __mspabi_func_epilog_1
-0000c262   __TI_ISR_TRAP
-0000c268   __TI_decompress_rle24
-0000c26e   _system_pre_init
-0000c272   C$$EXIT
-0000c272   abort
-0000c276   vel
+0000c19c   timer_isr
+0000c1c8   recep_isr
+0000c1e4   _c_int00
+0000c1e4   _c_int00_noexit
+0000c1fe   __TI_zero_init
+0000c212   memset
+0000c226   uart_getc
+0000c23a   __TI_decompress_none
+0000c24c   memcpy
+0000c25e   __mspabi_func_epilog_7
+0000c260   __mspabi_func_epilog_6
+0000c262   __mspabi_func_epilog_5
+0000c264   __mspabi_func_epilog_4
+0000c266   __mspabi_func_epilog_3
+0000c268   __mspabi_func_epilog_2
+0000c26a   __mspabi_func_epilog_1
+0000c26e   __TI_ISR_TRAP
+0000c274   __TI_decompress_rle24
+0000c27a   _system_pre_init
+0000c27e   C$$EXIT
+0000c27e   abort
+0000c282   vel
 0000c2a2   __TI_Handler_Table_Base
 0000c2a8   __TI_Handler_Table_Limit
 0000c2ac   __TI_CINIT_Base
